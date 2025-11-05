@@ -10,7 +10,7 @@ async function ShoppingCart() {
    return (
 
       <>
-         <main className="mx-auto grid grid-cols-4 gap-8 px-10 h-full">
+         <main className="mx-auto grid grid-cols-4 gap-8 px-10">
             {
                cards.map((item) => (
                   (item.userId == session?.user.id || session?.user.role == user_role.ADMIN) && (

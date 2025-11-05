@@ -1,6 +1,7 @@
 import { signIn } from "@/auth";
 import Image from 'next/image'
 import github from '@/public/buttons/github.png'
+import google from '@/public/buttons/google.png'
 export function GitButton() {
    return (
       <form action={
@@ -17,7 +18,6 @@ export function GitButton() {
       </form>
    );
 }
-import google from '../public/buttons/google.png'
 export function GoogleButton() {
    return (
       <form action="">

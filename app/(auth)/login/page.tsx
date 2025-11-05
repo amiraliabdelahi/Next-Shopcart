@@ -1,6 +1,6 @@
 "use client"
 import { loginAction } from "@/app/actions/login";
-import { GitButton, GoogleButton } from "@/components/ProviderButton";
+import { GitButton, GoogleButton } from "@/app/components/ProviderButton";
 import { toast } from "sonner";
 import Link from "next/link";
 

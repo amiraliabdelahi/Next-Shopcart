@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { CardMap } from "@/components/CardMap";
+import { CardMap } from "@/app/components/CardMap";
 import { user_role } from "@prisma/client";
 import { createCard } from "../actions/create";
 import prisma from "../../lib/config/db";
@@ -7,12 +7,11 @@ import prisma from "../../lib/config/db";
 async function AdminPage() {
    const session = await auth()
    const cards = await prisma.card.findMany()
-
    return (
       <>
          {session?.user?.role == user_role.ADMIN && <div className="flex mx-auto justify-center gap-20">
 
-            <form className="flex flex-col gap-3 w-[35%] h-[550px] items-center p-8 bg-white rounded" action={
+            <form className="flex flex-col gap-3 max-w-lg items-center p-8 bg-white rounded" action={
                createCard
             }>
                <h1 className="font-extrabold text-3xl text-center text-[#66bd91]">Admin Panel</h1>
@@ -60,8 +59,8 @@ async function AdminPage() {
             </form>
             <main className="flex flex-col gap-6">
                {
-                  cards.map((items) => (
-                     <CardMap card={items} />
+                  cards.map((items,index) => (
+                     <CardMap card={items} key={index} />
                   ))
                }
             </main>

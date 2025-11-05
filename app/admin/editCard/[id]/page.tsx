@@ -1,11 +1,11 @@
-"use client"
 import { updateCard } from "@/app/actions/update";
 
-function editCard({ params, searchParams }: { params: { id: string }, searchParams: { [key: string]: string | string[] | undefined }; }) {
+export default function editCard({ params, searchParams }: { params: { id: string }, searchParams: { [key: string]: string | undefined }; }) {
    return (
       <>
-         <form className="flex flex-col gap-2 mx-auto w-[35%] items-center p-8 bg-white rounded" action={
+         <form className="flex flex-col gap-2 mx-auto max-w-lg items-center p-8 bg-white rounded" action={
             async (formdata: FormData) => {
+               "use server"
                await updateCard(params, formdata)
             }
          }>
@@ -59,5 +59,3 @@ function editCard({ params, searchParams }: { params: { id: string }, searchPara
       </>
    );
 }
-
-export default editCard;

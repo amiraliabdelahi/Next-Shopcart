@@ -43,7 +43,7 @@ function Introduction() {
                   href="/shopcart"
                   className="w-28 rounded-md font-semibold bg-[#66bd91] py-2 text-center text-white transition-all duration-300 hover:bg-[#4ba377]"
                >
-                  Buy
+                  Finish
                </Link>
                <button
                   className="w-44 px-4 flex gap-2 font-semibold text-[#66bd91] border border-[#66bd91] justify-center items-center rounded-md py-2 text-center transition-all duration-300 hover:text-[#00b359]"
@@ -53,7 +53,7 @@ function Introduction() {
                </button>
             </main>
          </section>
-         <Image src={shopcart} alt="" className="size-[500px]" />
+         <Image src={shopcart} alt="" className="size-[500px] max-md:hidden" />
       </div>
    );
 }

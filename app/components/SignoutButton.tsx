@@ -9,8 +9,8 @@ import {
    AlertDialogHeader,
    AlertDialogTitle,
    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
+} from "@/app/components/ui/alert-dialog"
+import { Button } from "@/app/components/ui/button"
 import { signOut, useSession } from "next-auth/react"
 
 export function SignoutButton() {
@@ -32,7 +32,7 @@ export function SignoutButton() {
                <AlertDialogCancel>Cancel</AlertDialogCancel>
                <AlertDialogAction onClick={
                   () => signOut()
-               } className="bg-[#2f8a62] px-6 hover:bg-[#66bd91]">Exit</AlertDialogAction>
+               } className="bg-[#2f8a62] px-7 hover:bg-[#66bd91]">Exit</AlertDialogAction>
             </AlertDialogFooter>
          </AlertDialogContent>
       </AlertDialog>
