@@ -1,31 +1,31 @@
 import { auth } from "@/auth";
-import { UserRole } from "@prisma/client";
+import { user_role } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import prisma from "../../lib/config/db";
 
 async function ShoppingCart() {
-   const cards = await prisma.shopitem.findMany({ include: { carditem: true, user: true } })
+   const cards = await prisma.shopitem.findMany({ include: { card: true, user: true } })
    const session = await auth()
    return (
 
       <>
-         <main className="mx-auto grid grid-cols-4 gap-8 w-[95%] h-full">
+         <main className="mx-auto grid grid-cols-4 gap-8 px-10 h-full">
             {
                cards.map((item) => (
-                  (item.userId == session?.user.id || session?.user.role == UserRole.ADMIN) && (
-                     <div key={item.id} data-admin={session.user.role == UserRole.ADMIN} className="flex flex-col group mx-auto justify-center p-8 gap-3 rounded-lg w-full bg-white text-center">
+                  (item.userId == session?.user.id || session?.user.role == user_role.ADMIN) && (
+                     <div key={item.id} data-admin={session.user.role == user_role.ADMIN} className="flex flex-col group mx-auto justify-center p-8 gap-3 rounded-lg w-full bg-white text-center">
 
                         <div className="size-40 mx-auto relative">
-                           <Image src={item.carditem.image!} className="bg-cover" fill={true} alt="" />
+                           <Image src={item.card.image!} className="bg-cover" fill={true} alt="" />
                         </div>
-                        <h1 className="text-4xl font-extrabold">{item.carditem.title}</h1>
+                        <h1 className="text-4xl font-extrabold">{item.card.title}</h1>
                         <h1 className="font-semibold hidden group-data-[admin]:block">{item.user.email}</h1>
                         <main className="flex justify-center gap-6">
-                           <h2 className="">Price: {item.carditem.price}</h2>
+                           <h2 className="">Price: {item.card.price}</h2>
                            <h1 className="">Amount: {item.amount}</h1>
                         </main>
-                        <h2 className="font-semibold">Total: {Number(item.carditem.price) * Number(item.amount)}</h2>
+                        <h2 className="font-semibold">Total: {Number(item.card.price) * Number(item.amount)}</h2>
                         <main className="flex items-center justify-center gap-4">
                            <form action={
                               async () => {

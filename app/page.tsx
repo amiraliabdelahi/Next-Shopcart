@@ -1,10 +1,11 @@
 import { auth } from "@/auth";
 import Introduction from "@/components/Introduction";
-import { UserRole } from "@prisma/client";
+import { user_role } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import prisma from "../lib/config/db";
+import { randomUUID } from "crypto";
 export default async function Home() {
   const cards = await prisma.card.findMany();
   const session = await auth();
@@ -54,6 +55,7 @@ export default async function Home() {
                       amount: '1',
                       cardId: item.id,
                       userId: session?.user.id!,
+                      id: randomUUID()
                     },
                   });
                   revalidatePath("/shopcart");
@@ -64,7 +66,7 @@ export default async function Home() {
               }
             >
               {
-                session?.user.role != UserRole.ADMIN ? <button
+                session?.user.role != user_role.ADMIN ? <button
                   type="submit"
                   className="w-full bg-[#4ba377] py-2 rounded-lg text-white transition-all font-semibold duration-150 hover:bg-[#66bd91]"
                 >

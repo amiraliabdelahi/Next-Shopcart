@@ -22,19 +22,22 @@ model shopitem {
   userId String
   cardId String
   amount String
-  card   card   @relation(fields: [cardId], references: [id], onDelete: Cascade, map: "Shopitem_cardId_fkey")
+  card   card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  user   user   @relation(fields: [userId], references: [id])
 
-  @@index([cardId], map: "Shopitem_cardId_fkey")
+  @@index([cardId], map: "shopitem_cardId_fkey")
+  @@index([userId], map: "shopitem_userId_fkey")
 }
 
 model user {
-  id        String    @id
+  id        String     @id
   name      String?
-  email     String    @unique(map: "email")
+  email     String     @unique(map: "email")
   password  String?
-  role      user_role @default(USER)
-  createdAt DateTime  @default(now())
+  role      user_role  @default(USER)
+  createdAt DateTime   @default(now())
   updatedAt DateTime
+  shopitem  shopitem[]
 }
 
 enum user_role {
