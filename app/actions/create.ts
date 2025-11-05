@@ -3,7 +3,7 @@
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { join } from "path";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 import { getCardByTitle } from "../data/getCardByTitle";
 export const createCard = async (formdata: FormData) => {
   const existingCard = await getCardByTitle(formdata.get("title") as string);

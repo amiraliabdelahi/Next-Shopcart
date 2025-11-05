@@ -18,7 +18,7 @@ export function SignoutButton() {
    return (
       <AlertDialog>
          <AlertDialogTrigger asChild>
-            <Button variant="custome">Signout ({session.data?.user.email})</Button>
+            <Button variant="custome">Signout {session.data?.user.email}</Button>
          </AlertDialogTrigger>
          <AlertDialogContent>
             <AlertDialogHeader>

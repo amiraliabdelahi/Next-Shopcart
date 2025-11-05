@@ -1,5 +1,5 @@
-import { auth, signOut } from "@/auth";
-import { UserRole } from "@prisma/client";
+import { auth } from "@/auth";
+import { user_role } from "@prisma/client";
 import Link from "next/link";
 import { SignoutButton } from "./SignoutButton";
 
@@ -17,14 +17,14 @@ async function Navbar() {
          <div className="flex gap-12 items-center">
             <Link className="text-black hover:text-[#66bd91] font-bold text-sm transition-all duration-100" href="/contact">Contact us</Link>
             <Link className="text-black hover:text-[#66bd91] font-bold text-sm transition-all duration-100" href="/about">About me</Link>
-            {session?.user?.role == UserRole.ADMIN && (
+            {session?.user?.role == user_role.ADMIN && (
                <Link className="text-black hover:text-[#66bd91] font-bold text-sm transition-all duration-100" href="/admin">Manage</Link>
             )}
             {user ? (
                <SignoutButton />
             ) : (
                <Link
-                  href="/Login"
+                  href="/login"
                   className="font-bold text-black text-sm transition-all text-md duration-200 hover:text-[#66bd91]"
                >
                   Login

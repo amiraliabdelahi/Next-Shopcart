@@ -1,7 +1,7 @@
 "use server";
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 import { join } from "path";
 
 export const updateCard = async (

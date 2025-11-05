@@ -1,11 +1,10 @@
 "use client"
 import { registerAction } from "@/app/actions/signup";
-import { useToast } from "@/components/ui/use-toast";
+import {toast} from 'sonner'
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 function RegisterPage() {
-   const { toast } = useToast()
    return (
       <>
          <form action={
@@ -13,22 +12,18 @@ function RegisterPage() {
                const result = await registerAction(formdata)
                if (result?.error) {
                   // setError(result.error)
-                  toast({
-                     title: "Registeration Failed",
+                  toast.error("Registeration Failed",{
                      description: result.error,
-                     variant: "destructive"
                   })
                }
                else {
-                  toast({
-                     title: "Registeration Succesfull",
+                  toast.success("Registeration Succesfull",{
                      description: `Registered user with email : ${formdata.get("email")}`,
-                     variant: "success"
                   })
                   redirect("/login")
                }
             }
-         } className="flex flex-col w-[35%] py-10 gap-4 mx-auto items-center bg-white p-8 rounded-lg shadow-md shadow-[#70b391] [&>*]:w-[380px]">
+         } className="flex flex-col max-w-lg py-10 gap-4 mx-auto items-center bg-white p-8 rounded-lg shadow-md shadow-[#70b391] [&>*]:w-[380px]">
             <h1 className="text-[#70b391] text-4xl text-center">Signup Page</h1>
             <section className="flex flex-col gap-1">
                <p className="text-left text-[#403D39]">Username</p>

@@ -7,37 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
+model card {
+  id       String     @id
+  title    String     @unique(map: "Card_title_key")
+  body     String     @db.Text
+  price    String
+  amount   String
+  image    String?
+  shopitem shopitem[]
+}
+
+model shopitem {
+  id     String @id
+  userId String
+  cardId String
+  amount String
+  card   card   @relation(fields: [cardId], references: [id], onDelete: Cascade, map: "Shopitem_cardId_fkey")
+
+  @@index([cardId], map: "Shopitem_cardId_fkey")
+}
+
+model user {
+  id        String    @id
+  name      String?
+  email     String    @unique(map: "email")
+  password  String?
+  role      user_role @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+}
+
+enum user_role {
   USER
   ADMIN
-}
-
-model User {
-  id        String     @id @default(cuid())
-  name      String?
-  email     String     @unique
-  password  String?
-  role      UserRole   @default(USER)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  shopitems Shopitem[]
-}
-
-model Card {
-  id     String     @id @default(cuid())
-  title  String     @unique
-  image  String?
-  body   String     @db.Text
-  price  String
-  amount String
-  items  Shopitem[]
-}
-
-model Shopitem {
-  id       String @id @default(cuid())
-  amount   String
-  userId   String
-  cardId   String
-  carditem Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  user     User   @relation(fields: [userId], references: [id])
 }

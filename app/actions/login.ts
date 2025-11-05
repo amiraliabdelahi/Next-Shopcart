@@ -4,6 +4,7 @@ import { AuthError } from "next-auth";
 
 export const loginAction = async (formdata: FormData) => {
   try {
+    console.log(formdata)
     await signIn("credentials", formdata);
   } catch (error) {
     if (error instanceof AuthError) {

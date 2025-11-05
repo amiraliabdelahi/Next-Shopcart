@@ -1,13 +1,17 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth, { DefaultSession } from "next-auth";
-import { getUserById } from "./app/data/getUserById";
-import authConfig from "./auth.config";
-import prisma from "./app/config/db";
+import { getUserById } from "./lib/getUserById";
+import prisma from "./lib/config/db";
+import Credentials from "next-auth/providers/credentials";
+import { getUserByEmail } from "./lib/getUserByEmail";
+import { signInSchema } from "./lib/zod";
+import { compare } from "bcryptjs";
 
 declare module "next-auth" {
   interface Session {
     user: {
       role: "USER" | "ADMIN";
+      id: string
     } & DefaultSession["user"];
   }
 }
@@ -38,5 +42,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-  ...authConfig,
+  providers: [
+    Credentials({
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async (credentials) => {
+        const validatedFields = signInSchema.safeParse(credentials);
+        if (!validatedFields.success) return null;
+        const { email, password } = validatedFields.data;
+        const user = await getUserByEmail(email);
+        console.log(user);
+        if (!user || !user.email) {
+          return null
+        };
+        // const passowrdsMatch = await compare(password, user.password as string);
+        if (password !== user.password) {
+          return null
+        };
+        console.log("login succes");
+        return user;
+      },
+    }),
+  ],
 });

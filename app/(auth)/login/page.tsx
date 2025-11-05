@@ -1,30 +1,25 @@
 "use client"
 import { loginAction } from "@/app/actions/login";
 import { GitButton, GoogleButton } from "@/components/ProviderButton";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import Link from "next/link";
 
 function LoginPage() {
-   const { toast } = useToast()
    return (<>
       <form action={
          async (formdata: FormData) => {
             const result = await loginAction(formdata)
             if (result?.error) {
-               toast({
-                  title: "Login Failed",
-                  description: result.error,
-                  variant: "destructive"
+               toast.error("Login Failed",{
+                  description: result.error
                })
             } else {
-               toast({
-                  title: "Login Succesfull",
+               toast.success("Login Succesfull",{
                   description: `Logged in as user with Email : ${formdata.get("email")}`,
-                  variant: "success"
                })
             }
          }
-      } className="flex flex-col w-[35%] py-12 gap-4 mx-auto items-center bg-white p-8 rounded-lg shadow-md shadow-[#70b391] [&>*]:w-[380px]">
+      } className="flex flex-col max-w-lg py-12 gap-4 mx-auto items-center bg-white p-8 rounded-lg shadow-md shadow-[#70b391] [&>*]:w-[380px]">
          <p className="text-[#70b391] text-4xl text-center">Login Page</p>
          <section className="flex flex-col gap-1">
             <p className="text-left text-[#403D39]">Email</p>

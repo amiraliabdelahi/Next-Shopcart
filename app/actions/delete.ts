@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 
 export const deleteCard = async (id: string) => {
   try {

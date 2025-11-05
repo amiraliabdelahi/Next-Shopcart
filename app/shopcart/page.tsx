@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { UserRole } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 
 async function ShoppingCart() {
    const cards = await prisma.shopitem.findMany({ include: { carditem: true, user: true } })

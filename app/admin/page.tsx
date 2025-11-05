@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
 import { CardMap } from "@/components/CardMap";
-import { UserRole } from "@prisma/client";
+import { user_role } from "@prisma/client";
 import { createCard } from "../actions/create";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 
 async function AdminPage() {
    const session = await auth()
@@ -10,7 +10,7 @@ async function AdminPage() {
 
    return (
       <>
-         {session?.user?.role == UserRole.ADMIN && <div className="flex mx-auto justify-center gap-20">
+         {session?.user?.role == user_role.ADMIN && <div className="flex mx-auto justify-center gap-20">
 
             <form className="flex flex-col gap-3 w-[35%] h-[550px] items-center p-8 bg-white rounded" action={
                createCard

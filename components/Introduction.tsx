@@ -1,5 +1,5 @@
 import Image from "next/image";
-import shopcart from '@/public/home/shopcart.svg'
+import shopcart from '@/public/image/1.svg'
 import Link from "next/link";
 function Introduction() {
    return (

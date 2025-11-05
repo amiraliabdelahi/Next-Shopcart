@@ -1,7 +1,7 @@
 "use server";
 import { getUserByEmail } from "../data/getUserByEmail";
 import { hash } from "bcryptjs";
-import prisma from "../config/db";
+import prisma from "../../lib/config/db";
 
 export async function registerAction(formdata: FormData) {
   const existingUser = await getUserByEmail(formdata.get("email") as string);

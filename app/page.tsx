@@ -4,7 +4,7 @@ import { UserRole } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import prisma from "./config/db";
+import prisma from "../lib/config/db";
 export default async function Home() {
   const cards = await prisma.card.findMany();
   const session = await auth();

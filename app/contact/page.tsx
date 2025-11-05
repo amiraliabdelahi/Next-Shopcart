@@ -1,10 +1,9 @@
 "use client"
 import Image from "next/image";
-import img from '../../public/home/homePic2.jpg';
-import { useToast } from "@/components/ui/use-toast";
+import img from '../../public/image/1693299186760.jpg';
+import {toast} from "sonner"
 import { useRouter } from "next/navigation";
 function ContactPage() {
-   const { toast } = useToast()
    const router = useRouter()
    return (
       <main className="flex flex-col gap-4 py-8">
@@ -17,15 +16,14 @@ function ContactPage() {
                <Image
                   className="h-full rounded-md"
                   src={img}
+                  loading="lazy"
                   alt=""
                />
             </main>
             <form action={
                async () => {
-                  toast({
-                     title: "Massage: Your massage has been sent!",
+                  toast.success("Message: Your message has been sent!",{
                      description: "Friday, February 10, 2023 at 5:57 PM",
-                     variant: "success"
                   })
                   router.push("/")
                }
